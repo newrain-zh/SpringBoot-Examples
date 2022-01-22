@@ -41,6 +41,6 @@ public class DynamicTestController {
 
     @RequestMapping("/ds")
     public Result<Integer> findByDs() {
-        return Result.ok(masterService.findByDS());
+        return Result.ok(masterService.findByDS("tenant"));
     }
 }

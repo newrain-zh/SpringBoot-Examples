@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,6 +12,10 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserMapper {
 
-    int count(@Param("appid") String appId);
+    @DS("#tenant")
+    int count(@Param("appid") String appId, String tenant);
+
+    @DS("#tenant")
+    int count(@Param("tenant") String tenant);
 
 }

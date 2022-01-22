@@ -5,6 +5,5 @@
     <select id="count" resultType="java.lang.Integer">
         SELECT COUNT(1)
         FROM wechat_user
-        where appid = #{appid}
     </select>
 </mapper>
