@@ -10,15 +10,23 @@ spring:
       strict: true
       datasource:
         # 主库数据源
-        master:
+        ds1:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:23306/xxx?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-          username: xxxxx
-          password: xxxx
+          url: jdbc:mysql://localhost:3307/ds1
+          username: root
+          password: 123456
         ds0:
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://localhost:3306/ds0
           username: root
           password: 123456
+#        ds0:
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://10.137.142.233:30006/dia3.0?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true
+#          username: siit
+#          password: siit2021
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+debug: true
