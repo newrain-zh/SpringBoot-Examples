@@ -55,7 +55,7 @@ public class MasterService {
     }
 
     /**
-     * 手动指定主库
+     * 手动指定数据源
      *
      * @return
      */
@@ -69,9 +69,8 @@ public class MasterService {
      *
      * @return
      */
-    @DS(value = "ds0")
     public int find(String tenant) {
-        return wechatUserMapper.count();
+        return wechatUserMapper.count(tenant);
     }
 
     /**

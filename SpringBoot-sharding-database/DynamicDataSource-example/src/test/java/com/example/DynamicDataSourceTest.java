@@ -17,9 +17,11 @@ public class DynamicDataSourceTest {
     @Autowired
     private MasterService masterService;
 
+    @Test
     public void selectionDataSource() {
-        //        DynamicDataSourceContextHolder.push("master");
-
+        int ds0 = masterService.find("ds0");
+        int ds1 = masterService.find("ds1");
+        log.info("ds0.count={} ds1.count={}", ds0, ds1);
     }
 
     /**
