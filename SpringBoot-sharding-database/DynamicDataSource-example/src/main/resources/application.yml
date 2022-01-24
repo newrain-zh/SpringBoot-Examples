@@ -6,7 +6,7 @@ spring:
     name: DynamicDataSource-example
   datasource:
     dynamic:
-      primary: master
+      primary: ds0
       strict: true
       datasource:
         # 主库数据源
@@ -27,6 +27,6 @@ spring:
 #          password: siit2021
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-debug: true
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+debug: false

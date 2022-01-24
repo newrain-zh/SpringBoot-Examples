@@ -20,7 +20,7 @@ public class PublishEndpoint implements ApplicationRunner {
     public void run(ApplicationArguments applicationArguments) throws Exception {
         //do something
         System.out.println("加载完成。。。。");
-        int ds0 = masterService.findByParams("ds2");
+        int ds0 = masterService.findByParams("ds0");
         int ds1 = masterService.findByParams("ds1");
         log.info("ds0={},d1={}", ds0, ds1);
     }

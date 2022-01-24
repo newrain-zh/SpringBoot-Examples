@@ -33,7 +33,6 @@ public class DynamicTestController {
         return Result.ok(masterService.findByParams(tenant));
     }
 
-
     @RequestMapping("/master")
     public Result<Integer> find() {
         return Result.ok(masterService.find());
@@ -41,6 +40,6 @@ public class DynamicTestController {
 
     @RequestMapping("/ds")
     public Result<Integer> findByDs() {
-        return Result.ok(masterService.findByDS("tenant"));
+        return Result.ok(masterService.find("tenant"));
     }
 }
