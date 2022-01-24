@@ -6,6 +6,7 @@ import com.example.entity.FindUserParams;
 import com.example.repository.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Stream;
@@ -25,28 +26,11 @@ public class MasterService {
      */
     @DS("#header.tenant")
     public int findByHeader() {
-        int count = wechatUserMapper.count("wxbfd8f632ef3eba3b");
+        int count = wechatUserMapper.count();
         log.info("findByHeader:{}", count);
-        return count();
+        return count;
     }
 
-    public int count() {
-        String tenant = DynamicDataSourceContextHolder.peek();
-        log.info("count() start dataSource:{}", DynamicDataSourceContextHolder.peek());
-//        DynamicDataSourceContextHolder.push("ds0");
-//        log.info("count() dataSource:{}", DynamicDataSourceContextHolder.peek());
-        Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5, 6);
-        integerStream.parallel().forEach(integer -> {
-            findByDS(tenant);
-        });
-      /*  new Thread(() -> {
-            findByDS(tenant);
-        }).start();*/
-        log.info("count() end dataSource:{}", DynamicDataSourceContextHolder.peek());
-        int count = wechatUserMapper.count("wxbfd8f632ef3eba3b");
-        log.info("count() end dataSource:{}", DynamicDataSourceContextHolder.peek());
-        return wechatUserMapper.count("wxbfd8f632ef3eba3b");
-    }
 
     /**
      * 从实体类获取数据源
@@ -56,7 +40,7 @@ public class MasterService {
      */
     @DS("#findUserParams.tenant")
     public int findByEntity(FindUserParams findUserParams) {
-        return wechatUserMapper.count("wx######");
+        return wechatUserMapper.count();
     }
 
     /**
@@ -65,14 +49,9 @@ public class MasterService {
      * @param tenant
      * @return
      */
-//    @DS("#tenant")
+    @DS("#tenant")
     public int findByParams(String tenant) {
-      /*  Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5, 6);
-        integerStream.parallel().forEach(integer -> {
-            int count = wechatUserMapper.count("wxbfd8f632ef3eba3b", tenant);
-            log.info("count:{}", count);
-        });*/
-        return wechatUserMapper.count(tenant);
+        return wechatUserMapper.count();
     }
 
     /**
@@ -80,9 +59,9 @@ public class MasterService {
      *
      * @return
      */
-    @DS(value = "master")
+    @DS(value = "ds1")
     public int find() {
-        return wechatUserMapper.count("wx######");
+        return wechatUserMapper.count();
     }
 
     /**
@@ -90,13 +69,55 @@ public class MasterService {
      *
      * @return
      */
-    public int findByDS(String tenant) {
-//        DynamicDataSourceContextHolder.push("master");
-        log.info("findByDS() params:{},dataSource:{}", tenant, DynamicDataSourceContextHolder.peek());
-//        int count = wechatUserMapper.count("wxbfd8f632ef3eba3b");
-        int count = wechatUserMapper.count("wxbfd8f632ef3eba3b", tenant);
-//        DynamicDataSourceContextHolder.poll();
-        log.info("findByDS() result:{},dataSource:{}", count, DynamicDataSourceContextHolder.peek());
-        return count;
+    @DS(value = "ds0")
+    public int find(String tenant) {
+        return wechatUserMapper.count();
+    }
+
+    /**
+     * 异步操作+异步操作 无法切库
+     *
+     * @param tenant
+     */
+    @Async
+    @DS("#tenant")
+    public void asyncByAsync(String tenant) {
+        async();
+    }
+
+    public void async() {
+        String currentDataSource = DynamicDataSourceContextHolder.peek();
+        int outCount = wechatUserMapper.count();
+        //currentDataSourceOut=ds1 count:2
+        log.info("currentDataSourceOut={} count:{}", currentDataSource, outCount);
+        Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5, 6);
+        new Thread(() -> {
+            String threadDatasource = DynamicDataSourceContextHolder.peek();
+            int count = wechatUserMapper.count();
+            //currentDataSourceOut=null count:2
+            log.info("currentDataSourceThread={} count={}", threadDatasource, count);
+        }).start();
+        integerStream.parallel().forEach(integer -> {
+            String parallelDataSource = DynamicDataSourceContextHolder.peek();
+            new Thread(() -> {
+                //currentDataSourceIn=null count=1
+                int count = wechatUserMapper.count();
+                log.info("currentDataSourceIn={} count={}", parallelDataSource, count);
+            }).start();
+        });
+    }
+
+    /**
+     * 异步操作 切库没有问题
+     *
+     * @param tenant
+     */
+    @Async
+    @DS("#tenant")
+    public void async(String tenant) {
+        String threadDatasource = DynamicDataSourceContextHolder.peek();
+        int count = wechatUserMapper.count();
+        //currentDataSourceOut=null count:2
+        log.info("currentDataSourceThread={} count={}", threadDatasource, count);
     }
 }

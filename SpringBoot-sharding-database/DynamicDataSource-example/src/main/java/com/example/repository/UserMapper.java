@@ -18,4 +18,5 @@ public interface UserMapper {
     @DS("#tenant")
     int count(@Param("tenant") String tenant);
 
+    int count();
 }
