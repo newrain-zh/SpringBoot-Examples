@@ -13,8 +13,8 @@ class KafkaTest {
 
     @Test
     void send() {
-        for (int i = 0; i < 100; i++) {
-            kafkaTemplate.send("myKafka", "this test msg!");
+        for (int i = 0; i < 999; i++) {
+            kafkaTemplate.send("kafka-test", "this test msg! =" + i);
         }
     }
 
