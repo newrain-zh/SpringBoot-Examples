@@ -63,11 +63,12 @@ public class DelayQueueJob {
     /**
      * 入列
      */
-    @Scheduled(fixedRate = 3000)
+    @Scheduled(fixedRate = 500)
     public void offerDelayQueue() {
         long currentTimeMillis = System.currentTimeMillis();
         String dateTime = longToString(currentTimeMillis);
         //score为当前时间+延时时间
+        //在使用zSet要注意member内容是不重复的，否则会更新score，这样会使得任务丢失。
         stringRedisTemplate.opsForZSet().add(DELAY_KEY, dateTime, currentTimeMillis + 10000);
     }
 

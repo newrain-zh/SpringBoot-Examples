@@ -8,7 +8,11 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>SpringBoot-sharding-database</module>
-        <module>SpringBoot-rabbitmq</module>
+        <module>SpringBoot-mq</module>
+        <module>SpringBoot-DevTools</module>
+        <module>SpringBoot-Aop</module>
+        <module>SpringBoot-MongoDB</module>
+        <module>SpringBoot-Canal</module>
     </modules>
     <packaging>pom</packaging>
     <parent>

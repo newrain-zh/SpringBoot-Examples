@@ -1,14 +1,12 @@
 package io.ymq.rabbitmq.ttl;
 
 import org.springframework.amqp.core.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Delayed;
 
 /**
  * 延时队列示例
