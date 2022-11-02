@@ -10,6 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>SpringBoot-rabbitmq</module>
+        <module>SpringBoot-rocketMq</module>
+        <module>SpringBoot-Kafka</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
