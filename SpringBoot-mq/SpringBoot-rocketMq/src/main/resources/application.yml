@@ -1,0 +1,17 @@
+rocketmq:
+  consumer:
+    consumeMessageBatchMaxSize: 1
+    consumeThreadMax: 32
+    consumeThreadMin: 5
+    group: ${spring.application.name}
+    groupName: ${spring.application.name}
+    isOnOff: 'on'
+    namesrvAddr: localhost:9876
+    topics: UserTopic~UserTag||MailTag;HelloTopic~HelloTag;YidaTopic~*
+  producer:
+    group: tx-group
+    groupName: ${spring.application.name}
+  name-server: localhost:9876
+spring:
+  application:
+    name: rocketmq-example
