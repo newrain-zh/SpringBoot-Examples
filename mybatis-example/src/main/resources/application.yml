@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: rocketmq-example
+  datasource:
+    url: jdbc:mysql://localhost:3310/concurr-test?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.example.mapper.**
+  global-config:
+    db-config:
+      logic-delete-value: 2
+      logic-not-delete-value: 0
+  configuration:
+    cache-enabled: false

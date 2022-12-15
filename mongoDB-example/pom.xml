@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-MongoDB</artifactId>
+    <artifactId>mongoDB-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringBoot-MongoDB</name>
     <description>SpringBoot-MongoDB</description>

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-DelayQueue-Redis</artifactId>
+    <artifactId>devTools-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot-DelayQueue-Redis</name>
-    <description>SpringBoot-DelayQueue-Redis</description>
+    <name>SpringBoot-DevTools</name>
+    <description>SpringBoot-DevTools</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -22,28 +22,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>4.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
         <!--        SpringBoot热加载包-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,6 +34,7 @@
             <optional>true</optional> <!-- 可以防止将devtools依赖传递到其他模块中 -->
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
