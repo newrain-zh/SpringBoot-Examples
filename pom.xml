@@ -7,12 +7,12 @@
     <artifactId>SpringBoot-Examples</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>SpringBoot-sharding-database</module>
-        <module>SpringBoot-mq</module>
-        <module>SpringBoot-DevTools</module>
-        <module>SpringBoot-Aop</module>
-        <module>SpringBoot-MongoDB</module>
-        <module>SpringBoot-Canal</module>
+        <module>sharding-database-example</module>
+        <module>mq-example</module>
+        <module>devTools-example</module>
+        <module>aop-example</module>
+        <module>mongoDB-example</module>
+        <module>canal-example</module>
     </modules>
     <packaging>pom</packaging>
     <parent>
