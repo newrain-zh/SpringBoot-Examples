@@ -1,4 +1,4 @@
-package com.example.aop.controller;
+package com.example.redis.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
