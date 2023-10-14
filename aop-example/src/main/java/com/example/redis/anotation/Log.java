@@ -1,4 +1,4 @@
-package com.example.aop.anotation;
+package com.example.redis.anotation;
 
 
 import java.lang.annotation.ElementType;
