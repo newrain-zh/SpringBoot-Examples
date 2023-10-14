@@ -1,4 +1,4 @@
-package com.example.aop;
+package com.example.redis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,10 +1,13 @@
-package com.example.aop.aspect;
+package com.example.redis.aspect;
 
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -14,25 +17,21 @@ import java.util.Arrays;
 
 /**
  * @author newRain
- * @
+ * @description log注解切面日志
  */
 @Aspect
 @Component
 @Slf4j
-public class ControllerLogAspect {
+public class LogAspect {
+
 
     /**
-     * 指定注解位置
-     * 两个..代表所有子目录，最后括号里的两个..代表所有参数
+     * 这里指定使用 @annotation 指定com.fishpro.aoplog.annotation.Log log注解
      */
-    @Pointcut("execution( * com.example.aop..controller.*.*(..))")
+    @Pointcut("@annotation(com.example.redis.anotation.Log)")
     public void logPointCut() {
 
     }
-
-    /**
-     * 指定当前执行方法在logPointCut之前执行
-     */
     @Before("logPointCut()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
         // 接收到请求，记录请求内容
@@ -47,23 +46,19 @@ public class ControllerLogAspect {
         log.info("参数 : " + Arrays.toString(joinPoint.getArgs()));
         //loggger.info("参数 : " + joinPoint.getArgs());
     }
-
-    /**
-     * 指定在方法之后返回
-     */
-    // returning的值和doAfterReturning的参数名一致
-    @AfterReturning(returning = "ret", pointcut = "logPointCut()")
-    public void doAfterReturning(Object ret) throws Throwable {
-        // 处理完请求，返回内容(返回值太复杂时，打印的是物理存储空间的地址)
-        log.info("返回值 : " + ret);
+    @Around("logPointCut()")
+    public Object around(ProceedingJoinPoint point) throws Throwable {
+        long beginTime = System.currentTimeMillis();
+        // 执行方法
+        Object result = point.proceed();
+        // 执行时长(毫秒)
+        long time = System.currentTimeMillis() - beginTime;
+        //异步保存日志 这里是文本日志
+        log.info("耗时:{}", time);
+        return result;
     }
 
-    @Around("logPointCut()")
-    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
-        long startTime = System.currentTimeMillis();
-        // ob 为方法的返回值
-        Object ob = pjp.proceed();
-        log.info("耗时 : " + (System.currentTimeMillis() - startTime));
-        return ob;
+    void saveLog(ProceedingJoinPoint joinPoint, long time) throws InterruptedException {
+
     }
 }
