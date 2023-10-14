@@ -13,6 +13,7 @@
         <module>aop-example</module>
         <module>mongoDB-example</module>
         <module>canal-example</module>
+        <module>redis-example</module>
     </modules>
     <packaging>pom</packaging>
     <parent>

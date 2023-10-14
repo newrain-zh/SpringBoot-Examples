@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-DelayQueue-Java</artifactId>
+    <artifactId>DelayQueue-Java</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot-DelayQueue-Java</name>
+    <name>DelayQueue-Java</name>
     <description>SpringBoot-DelayQueue-Java</description>
     <properties>
         <java.version>1.8</java.version>
