@@ -1,21 +1,19 @@
-package com.example.aop;
+package com.example.redis.controller;
 
-import com.example.aop.anotation.Log;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author newRain
- * @description 使用注解来记
+ * @description controller包下自动记录日志
  */
 @RestController
-public class LogTestController {
+public class LogController {
 
-    @RequestMapping("/log/no")
+    @RequestMapping("/log/yes")
     @ResponseBody
-    @Log
     public String log(String name) {
-        return "/log/no";
+        return "log";
     }
 }
