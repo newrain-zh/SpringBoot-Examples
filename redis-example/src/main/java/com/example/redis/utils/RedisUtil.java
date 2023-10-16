@@ -138,7 +138,7 @@ public class RedisUtil {
      *
      * @return
      */
-    public String randomKey() {
+    public String   randomKey() {
         return stringRedisTemplate.randomKey();
     }
 
