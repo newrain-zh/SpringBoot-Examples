@@ -16,7 +16,7 @@
         <module>redis-example</module>
         <module>validation-example</module>
         <module>qrcode-example</module>
-        <module>qrcode-example</module>
+        <module>permission-example</module>
     </modules>
     <packaging>pom</packaging>
     <parent>
