@@ -29,7 +29,6 @@ public class QrcodeService {
 
     public void downloadQrcode(QrcodeDownloadCommonParam dto, HttpServletResponse httpServletResponse) {
         String tempBasePath = "./" + File.separator + UUID.randomUUID() + File.separator;
-        // 查询投放信息,用于生成文件名,已经校验过只能下载单个投放下二维码
         String nowDate = DateUtil.format(new Date(), "yyyy-MM-dd");
         List<QrcodeUtils.QrcodeParam> qrcodeParams = getQrcodeParams(dto, tempBasePath, nowDate);
         QrcodeUtils.generateQrcodeImages(qrcodeParams);
@@ -57,10 +56,8 @@ public class QrcodeService {
         if (fileList.size() == 1) {
             toUpload = fileList.get(0);
         } else {
-            // 打包
             Map<String, String> filePaths = new HashMap<>();
             fileList.forEach(file -> filePaths.put(file.getName(), file.getAbsolutePath()));
-            // 投放名称 问卷名称 YYYYMMDD
             String zipFileName = "二维码";
             PackUtils.packZip(filePaths, basePath, zipFileName, false);
             toUpload = new File(basePath + zipFileName);
